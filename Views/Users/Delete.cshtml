@@ -1,0 +1,12 @@
+@model WeightTracker.Data.User
+@{
+    ViewBag.Title = $"Powtwierdzenie usunięcia {Model.FullName}";    
+}
+<h2>@ViewBag.Title</h2>
+<div class="alert alert-danger fw-bolder" role="alert">
+    Ta czynność jest nieodwracalna i skutktuje usunięciem wszystkich danych powiązanych z kontem
+</div>
+<form asp-action="ConfirmDeletion">
+    <input type="hidden" name="id" value="@Model.UserId"/>
+    <input type="submit" class="btn btn-outline-danger" value="Potwierdż"/>
+</form>

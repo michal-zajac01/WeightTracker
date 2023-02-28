@@ -47,4 +47,16 @@ public class UsersController : Controller
         await _userRepository.UpdateAsync(user);
         return RedirectToAction(nameof(Index));
     }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var user = await _userRepository.ReadUser(id);
+        return View(user);
+    }
+
+    public async Task<IActionResult> ConfirmDeletion(int id)
+    {
+        await _userRepository.DeleteAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
 }
