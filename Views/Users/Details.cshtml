@@ -1,0 +1,13 @@
+@model WeightTracker.Data.User
+
+@{
+    ViewBag.Title = $"Detale użytwkonika {Model.FirstName} {Model.LastName}";
+}
+
+<h2>@ViewBag.Title</h2>
+<dl class="row">
+    <dt class="col-md-6">Imię:</dt>
+    <dd class="col-md-6">@Model.FirstName</dd>
+    <dt class="col-md-6">Nazwisko:</dt>
+    <dd class="col-md-6">@Model.LastName</dd>
+</dl>

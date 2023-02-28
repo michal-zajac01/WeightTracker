@@ -16,4 +16,10 @@ public class UsersController : Controller
     {
         return View(await _userRepository.ReadeUsers());
     }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var user = await _userRepository.ReadUser(id);
+        return View(user);
+    }
 }

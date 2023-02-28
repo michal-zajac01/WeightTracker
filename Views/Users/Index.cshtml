@@ -9,6 +9,11 @@
 <ul>
     @foreach (var user in Model)
     {
-        <li>@user.FirstName @user.LastName </li>
+        <li>@user.FirstName @user.LastName 
+            <a href="@Url.ActionLink("Details", "users", new { id = user.UserId })"
+               class="btn btn-success">
+                👤 Profil
+            </a>
+        </li>
     }
 </ul>
