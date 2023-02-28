@@ -5,6 +5,7 @@ namespace WeightTracker.Data;
 public class AppDbContext : DbContext
 {
     public virtual DbSet<Measurement> Mesurements { get; set; }
+    public virtual DbSet<User> Users { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
