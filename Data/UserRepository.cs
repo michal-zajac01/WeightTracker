@@ -20,15 +20,19 @@ public class UserRepository : IUserRepository
 
     public async Task<User> ReadUser(int userId)
     {
-        var user = await _db.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+        var user = await _db.Users
+            .Include(u => u.Measurements)
+            .FirstOrDefaultAsync(u => u.UserId == userId);
         if (user is null)
         {
             throw new ArgumentException($"No user found for id = {userId}");
         }
+        user.Measurements = user.Measurements.OrderBy(m => m.TakenOn)
+            .ToList();
         return user;
     }
 
-    public async Task<IEnumerable<User>> ReadeUsers()
+    public async Task<IEnumerable<User>> ReadUsers()
     {
         return await _db.Users.ToListAsync();
     }

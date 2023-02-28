@@ -11,9 +11,30 @@
     <dt class="col-md-6">Nazwisko:</dt>
     <dd class="col-md-6">@Model.LastName</dd>
 </dl>
-<div class="row">
-    <a href="@Url.ActionLink("Edit", "Users", new {id = Model.UserId})"
-       class="btn btn-outline-primary col-sm-6">✏️ Edytuj</a>
-    <a href="@Url.ActionLink("Delete", "Users", new {id = Model.UserId})" 
-       class="btn btn-outline-danger col-sm-6">❌ Usuń</a>
-</div>
+@if (Model.Measurements.Count != 0)
+{
+    <h3>Zapisane pomiary</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Data</th>
+            <th>Wartość</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var measurement in Model.Measurements)
+        {
+            <tr>
+                <th>@measurement.TakenOn.ToShortDateString()</th>
+                <td>@measurement.Value</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="row">
+        <a href="@Url.ActionLink("Edit", "Users", new {id = Model.UserId})"
+           class="btn btn-outline-primary col-sm-6">✏️ Edytuj</a>
+        <a href="@Url.ActionLink("Delete", "Users", new {id = Model.UserId})" 
+           class="btn btn-outline-danger col-sm-6">❌ Usuń</a>
+    </div>    
+}

@@ -14,7 +14,7 @@ public class UsersController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return View(await _userRepository.ReadeUsers());
+        return View(await _userRepository.ReadUsers());
     }
 
     public async Task<IActionResult> Details(int id)
