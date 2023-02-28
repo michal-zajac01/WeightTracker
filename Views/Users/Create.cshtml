@@ -1,0 +1,21 @@
+@model WeightTracker.Data.User
+
+@{
+    ViewBag.Title = "Utwórz nowego użytwkonika";
+}
+
+<h2>@ViewBag.Title</h2>
+<form asp-action="Create">
+    <div class="row">
+        <div class="col">
+            <input asp-for="FirstName" class="form-control" placeholder="Imię">
+        </div>
+        <div class="col">
+            <input asp-for="LastName" class="form-control" placeholder="Nazwisko">
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <input class="col btn btn-primary" type="submit" value="⨁ Utwórz"/>
+    </div>
+</form>
