@@ -12,4 +12,6 @@ public class User
     [StringLength(60)]
     public string LastName { get; set; }
     public virtual ICollection<Measurement> Measurements { get; set; }
+
+    public string FullName => $"{FirstName} {LastName}";
 }

@@ -34,4 +34,17 @@ public class UsersController : Controller
         await _userRepository.CreateAsync(user);
         return RedirectToAction(nameof(Index));
     }
+    
+    public async Task<IActionResult> Edit(int id)
+    {
+        var user = await _userRepository.ReadUser(id);
+        return View(user);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Edit(User user)
+    {
+        await _userRepository.UpdateAsync(user);
+        return RedirectToAction(nameof(Index));
+    }
 }
