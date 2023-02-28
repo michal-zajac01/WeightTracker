@@ -11,30 +11,56 @@
     <dt class="col-md-6">Nazwisko:</dt>
     <dd class="col-md-6">@Model.LastName</dd>
 </dl>
-@if (Model.Measurements.Count != 0)
-{
-    <h3>Zapisane pomiary</h3>
-    <table class="table">
-        <thead>
+<h3>Zapisane pomiary</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Wartość</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var measurement in Model.Measurements)
+    {
         <tr>
-            <th>Data</th>
-            <th>Wartość</th>
+            <th>@measurement.TakenOn.ToShortDateString()</th>
+            <td>@measurement.Value</td>
+            <td>
+                <form asp-action="Delete" asp-controller="Measurements">
+                    <input type="hidden" name="id" value="@measurement.MeasurementId"/>
+                    <input type="hidden" name="userId" value="@Model.UserId"/>
+                    <input type="submit" class="btn btn-danger" value="🗑️"/>
+                </form>
+            </td>
         </tr>
-        </thead>
-        <tbody>
-        @foreach (var measurement in Model.Measurements)
-        {
-            <tr>
-                <th>@measurement.TakenOn.ToShortDateString()</th>
-                <td>@measurement.Value</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    <div class="row">
-        <a href="@Url.ActionLink("Edit", "Users", new {id = Model.UserId})"
-           class="btn btn-outline-primary col-sm-6">✏️ Edytuj</a>
-        <a href="@Url.ActionLink("Delete", "Users", new {id = Model.UserId})" 
-           class="btn btn-outline-danger col-sm-6">❌ Usuń</a>
-    </div>    
-}
+    }
+    <tr>
+        <form asp-action="Create" asp-controller="Measurements">
+            <input type="hidden" name="UserId" value="@Model.UserId"/>
+            <td>
+                <input type="date"
+                       name="TakenOn" 
+                       value="@(DateTime.Now.ToString("yyyy-MM-dd"))"
+                       class="form-control"/>
+            </td>
+            <td>
+                <input type="number"
+                       step="0.05"
+                       name="Value" 
+                       value="@(Model.Measurements.LastOrDefault()?.Value ?? 0)"
+                       class="form-control"/>
+            </td>
+            <td>
+                <input type="submit" class="btn btn-success" value="➕"/>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<div class="row">
+    <a href="@Url.ActionLink("Edit", "Users", new {id = Model.UserId})"
+       class="btn btn-outline-primary col-sm-6">✏️ Edytuj</a>
+    <a href="@Url.ActionLink("Delete", "Users", new {id = Model.UserId})" 
+       class="btn btn-outline-danger col-sm-6">❌ Usuń</a>
+</div>
