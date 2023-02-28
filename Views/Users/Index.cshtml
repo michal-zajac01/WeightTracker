@@ -1,0 +1,14 @@
+@model System.Collections.Generic.IEnumerable<WeightTracker.Data.User>
+
+@{
+    ViewBag.Title = "Lista użytwkoników";
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+<ul>
+    @foreach (var user in Model)
+    {
+        <li>@user.FirstName @user.LastName </li>
+    }
+</ul>
